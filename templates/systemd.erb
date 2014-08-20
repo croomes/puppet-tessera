@@ -1,0 +1,15 @@
+[Unit]
+Description=Tessera
+Wants=basic.target
+After=basic.target network.target
+
+[Service]
+WorkingDirectory=<%= @root_dir %>
+ExecStart=/bin/inv run
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
